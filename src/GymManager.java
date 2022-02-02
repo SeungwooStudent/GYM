@@ -62,13 +62,14 @@ public class GymManager {
 			members.get(i).introduceMyself();
 		}
 	}
-	
+
 	public boolean isCheckID(String removeID) {
-		for(int i =0; i < members.size(); i++) {
-			if(!members.get(i).getID().equals(removeID)) {
+		for (int i = 0; i < members.size(); i++) {
+			if (members.get(i).getID().equals(removeID)) {
 				return true;
 			}
-		}return false;
+		}
+		return false;
 	}
 
 }

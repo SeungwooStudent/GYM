@@ -54,9 +54,10 @@ public class GYM {
 				gymUI.memberRemoveID();
 				String removeID = sc.next();
 				boolean ischeckID = manager.isCheckID(removeID);
-				if (ischeckID) {
+				if (!ischeckID) {
 					gymUI.nonID();
-				} else {
+				}
+				if (ischeckID) {
 					manager.deleteMember(removeID);
 					gymUI.removeComplete();
 				}
@@ -89,7 +90,7 @@ public class GYM {
 						gymUI.changecomplete();
 					}
 				} else {
-					gymUI.nonName();
+					gymUI.nonID();
 				}
 
 			} else if (choice == 4) {

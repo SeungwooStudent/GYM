@@ -50,9 +50,9 @@ public class GymUI {
 		System.out.println("3. 전화번호");
 	}
 
-	public void nonName() {
-		System.out.println("존재하지 않는 이름입니다.");
-	}
+//	public void nonName() {
+//		System.out.println("존재하지 않는 이름입니다.");
+//	}
 
 	public void changeNameInput() {
 		System.out.println("변경하실 이름을 입력해주세요.");
