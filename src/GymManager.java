@@ -3,11 +3,15 @@ import java.util.LinkedList;
 public class GymManager {
 	LinkedList<Member> members = new LinkedList<>();
 	GymUI gymUI = new GymUI();
+	DataBaseManager dbmanager = new DataBaseManager();
 
 	public void addMember(Member member) {
 		members.add(member);
 	}
 
+	public void selectMemberAll() {
+		dbmanager.selectAll();
+	}
 	public void deleteMember(String removeMamber) {
 		for (int i = 0; i < members.size(); i++) {
 			Member member = members.get(i);
@@ -17,10 +21,10 @@ public class GymManager {
 		}
 	}
 
-	public int findMember(String phonNumberTest) {
+	public int findMember(String id) {
 		for (int i = 0; i < members.size(); i++) {
 			Member member = members.get(i);
-			if (member.getID().equals(phonNumberTest)) {
+			if (member.getID().equals(id)) {
 				return i;
 			}
 		}

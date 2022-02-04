@@ -70,7 +70,7 @@ public class GymUI {
 		System.out.println("변경되었습니다.");
 	}
 
-	public void searchPhonNumber() {
+	public void searchID() {
 		System.out.println("찾으실 회원의 ID를 입력해주세요.");
 	}
 	public void chechID() {

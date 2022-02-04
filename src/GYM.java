@@ -65,8 +65,8 @@ public class GYM {
 			} else if (choice == 3) {
 				// 회원수정
 				gymUI.changeMemberInfor();
-				String changePhonNumber = sc.next();
-				int changeMemberIndex = manager.findMember(changePhonNumber);
+				String changeID = sc.next();
+				int changeMemberIndex = manager.findMember(changeID);
 				if (changeMemberIndex >= 0) {
 					gymUI.memberInforMation();
 					choice = sc.nextInt();
@@ -95,12 +95,13 @@ public class GYM {
 
 			} else if (choice == 4) {
 				// 회원검색
-				gymUI.searchPhonNumber();
-				String searchphonNumber = sc.next();
-				manager.searchMember(searchphonNumber);
+				gymUI.searchID();
+				String searchMemberID = sc.next();
+				manager.searchMember(searchMemberID);
 			} else if (choice == 5) {
 				// 회원출력
-				manager.printAll();
+//				manager.printAll();
+				manager.selectMemberAll();
 			} else if (choice == 6) {
 				// 프로그램 종료
 				break;
