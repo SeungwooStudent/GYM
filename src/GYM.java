@@ -15,6 +15,7 @@ public class GYM {
 		String phonNumber = null;
 		String memberID = null;
 		boolean isFind = true;
+		String date = null;
 		while (isFind) {
 			gymUI.MemberManagement();
 			int choice = sc.nextInt();
@@ -44,8 +45,8 @@ public class GYM {
 				gymUI.memberPhonNumber();
 				phonNumber = sc.next();
 
-				Member member = new Member(memberID, age, name, phonNumber);
-				manager.addMember(member);
+//				Member member = new Member(memberID, name, age, phonNumber, date);
+				manager.addMember(memberID, name, age, phonNumber,date);
 				gymUI.Addmember();
 				isFind = true;
 			} else if (choice == 2) {

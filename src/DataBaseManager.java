@@ -12,9 +12,10 @@ public class DataBaseManager {
 		DataBaseManager databasemansger = new DataBaseManager();
 		databasemansger.connect();
 //		databasemansger.select("1");
-		databasemansger.insert("3", "멍멍이", 10, "1313" , "2022-02-24");
+		databasemansger.insert("3", "멍멍이", 10, "1313", "2022-02-24");
 		databasemansger.selectAll();
 	}
+
 	public DataBaseManager() {
 		connect();
 	}
@@ -22,7 +23,8 @@ public class DataBaseManager {
 	public void connect() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); // MySQL - java connector할 클래스를 찾아주는거
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gymdb", "root", "1234"); // 내 mysql에 있는 DB랑 연결 (gymdb)
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gymdb", "root", "1234"); // 내 mysql에 있는 DB랑
+																										// 연결 (gymdb)
 
 			System.out.println("DB연결완료!");
 		} catch (ClassNotFoundException e) {
@@ -31,6 +33,7 @@ public class DataBaseManager {
 			System.out.println("DB 연결 오류 !" + e.getMessage());
 		}
 	}
+
 	public void select(String id) {
 		try {
 //			stmt = conn.createStatement();
@@ -38,7 +41,13 @@ public class DataBaseManager {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			ResultSet srs = pstmt.executeQuery();
-			printData(srs);
+//			printData(srs);
+			if (srs.next()) {
+				System.out.println("id : " + srs.getString("id"));
+				System.out.println("name : " + srs.getString("name"));
+				System.out.println("age : " + srs.getInt("age"));
+				System.out.println("phon_number : " + srs.getString("phon_number"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -68,8 +77,8 @@ public class DataBaseManager {
 			System.out.println("phon_number : " + phon_number);
 		}
 	}
-	
-	public void insert(String id, String name, int age , String phon_number, String date) {
+
+	public void insert(String id, String name, int age, String phon_number, String date) {
 		try {
 			String query = "insert into member values(?,?,?,?,?)";
 			pstmt = conn.prepareStatement(query);

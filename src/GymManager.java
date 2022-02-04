@@ -5,8 +5,12 @@ public class GymManager {
 	GymUI gymUI = new GymUI();
 	DataBaseManager dbmanager = new DataBaseManager();
 
-	public void addMember(Member member) {
-		members.add(member);
+//	public void addMember(Member member) {
+//		members.add(member);
+//	}
+	
+	public void addMember(String id, String name, int age, String phon_number, String date) {
+		dbmanager.insert(id, name, age, phon_number, date);
 	}
 
 	public void selectMemberAll() {
@@ -43,13 +47,14 @@ public class GymManager {
 		members.get(findIndex).setPhonNumber(changePhonNumber);
 	}
 
-	public void searchMember(String phonNumber) {
-		for (int i = 0; i < members.size(); i++) {
-			if (members.get(i).getID().equals(phonNumber)) {
-				members.get(i).introduceMyself();
-				return;
-			}
-		}
+	public void searchMember(String id) {
+//		for (int i = 0; i < members.size(); i++) {
+//			if (members.get(i).getID().equals(id)) {
+//				members.get(i).introduceMyself();
+//				return;
+//			}
+//		}
+		dbmanager.select(id);
 	}
 
 	public boolean CheckID(String memberId) {
