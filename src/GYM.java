@@ -46,19 +46,18 @@ public class GYM {
 				phonNumber = sc.next();
 
 //				Member member = new Member(memberID, name, age, phonNumber, date);
-				manager.addMember(memberID, name, age, phonNumber,date);
+				manager.addMember(memberID, name, age, phonNumber, date);
 				gymUI.Addmember();
 				isFind = true;
 			} else if (choice == 2) {
 				// 회원삭제
-
 				gymUI.memberRemoveID();
 				String removeID = sc.next();
-				boolean ischeckID = manager.isCheckID(removeID);
-				if (!ischeckID) {
+				boolean isCheckID = manager.isCheckID(removeID);
+				if (!isCheckID) {
 					gymUI.nonID();
 				}
-				if (ischeckID) {
+				if (isCheckID) {
 					manager.deleteMember(removeID);
 					gymUI.removeComplete();
 				}
@@ -67,27 +66,28 @@ public class GYM {
 				// 회원수정
 				gymUI.changeMemberInfor();
 				String changeID = sc.next();
-				int changeMemberIndex = manager.findMember(changeID);
-				if (changeMemberIndex >= 0) {
+				boolean changeMemberIndex = manager.isCheckID(changeID);
+//				String changeMemberIndex = manager.findMember(changeID);
+				if (changeMemberIndex) {
 					gymUI.memberInforMation();
 					choice = sc.nextInt();
 					if (choice == 1) {
 						// 회원 이름변경
 						gymUI.changeNameInput();
 						String changeName = sc.next();
-						manager.changeName(changeMemberIndex, changeName);
+						manager.changeName(changeName, changeID);
 						gymUI.changecomplete();
 					} else if (choice == 2) {
 						// 회원 나이변경
 						gymUI.changeAgeInput();
 						int changeAge = sc.nextInt();
-						manager.changeAge(changeMemberIndex, changeAge);
+						manager.changeAge(changeAge, changeID);
 						gymUI.changecomplete();
 					} else if (choice == 3) {
 						// 회원 전화번호변경
-						gymUI.changephonNumberInput();
-						String changeMemberPhonNumber = sc.next();
-						manager.changePhonNumber(changeMemberIndex, changeMemberPhonNumber);
+						gymUI.changephoneNumberInput();
+						String changeMemberPhoneNumber = sc.next();
+						manager.changePhonNumber(changeMemberPhoneNumber, changeID);
 						gymUI.changecomplete();
 					}
 				} else {

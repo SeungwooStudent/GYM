@@ -5,10 +5,6 @@ public class GymManager {
 	GymUI gymUI = new GymUI();
 	DataBaseManager dbmanager = new DataBaseManager();
 
-//	public void addMember(Member member) {
-//		members.add(member);
-//	}
-	
 	public void addMember(String id, String name, int age, String phon_number, String date) {
 		dbmanager.insert(id, name, age, phon_number, date);
 	}
@@ -16,45 +12,53 @@ public class GymManager {
 	public void selectMemberAll() {
 		dbmanager.selectAll();
 	}
-	public void deleteMember(String removeMamber) {
-		for (int i = 0; i < members.size(); i++) {
-			Member member = members.get(i);
-			if (member.getID().equals(removeMamber)) {
-				members.remove(i);
-			}
-		}
+
+	public void deleteMember(String deleteMember) {
+		dbmanager.delete(deleteMember);
+
+//		for (int i = 0; i < members.size(); i++) {
+//			Member member = members.get(i);
+//			if (member.getID().equals(deleteMember)) {
+//				members.remove(i);
+//			}
+//		}
+
 	}
 
-	public int findMember(String id) {
+	public boolean findMember(String id) {
+
 		for (int i = 0; i < members.size(); i++) {
 			Member member = members.get(i);
 			if (member.getID().equals(id)) {
-				return i;
+				return true;
 			}
 		}
-		return -1;
+		return false;
 	}
 
-	public void changeName(int findIndex, String changeName) {
-		members.get(findIndex).setName(changeName);
+	public void changeName(String changeName, String changeMemberIndex) {
+		dbmanager.updateName(changeName, changeMemberIndex);
 	}
 
-	public void changeAge(int findIndex, int changeAge) {
-		members.get(findIndex).setAge(changeAge);
+	public void changeAge(int changeAge, String changeMemberIndex) {
+		dbmanager.updateAge(changeAge, changeMemberIndex);
 	}
 
-	public void changePhonNumber(int findIndex, String changePhonNumber) {
-		members.get(findIndex).setPhonNumber(changePhonNumber);
+	public void changePhonNumber(String changePhoneNumber, String changeMemberIndex) {
+//		members.get(findIndex).setPhonNumber(changePhonNumber);
+		dbmanager.updatePhoneNumber(changePhoneNumber, changeMemberIndex);
 	}
 
 	public void searchMember(String id) {
+		dbmanager.select(id);
+
 //		for (int i = 0; i < members.size(); i++) {
 //			if (members.get(i).getID().equals(id)) {
 //				members.get(i).introduceMyself();
 //				return;
 //			}
 //		}
-		dbmanager.select(id);
+
 	}
 
 	public boolean CheckID(String memberId) {
@@ -73,12 +77,14 @@ public class GymManager {
 	}
 
 	public boolean isCheckID(String removeID) {
-		for (int i = 0; i < members.size(); i++) {
-			if (members.get(i).getID().equals(removeID)) {
-				return true;
-			}
-		}
-		return false;
+		return dbmanager.isCheckID(removeID);
+
+//		for (int i = 0; i < members.size(); i++) {
+//			if (members.get(i).getID().equals(removeID)) {
+//				return true;
+//			}
+//		}
+//		return false;
 	}
 
 }

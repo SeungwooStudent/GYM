@@ -62,7 +62,7 @@ public class GymUI {
 		System.out.println("변경하실 나이을 입력해주세요.");
 	}
 
-	public void changephonNumberInput() {
+	public void changephoneNumberInput() {
 		System.out.println("변경하실 ID를 입력해주세요.");
 	}
 

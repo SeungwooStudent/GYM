@@ -8,13 +8,13 @@ public class DataBaseManager {
 	Connection conn;
 	PreparedStatement pstmt;
 
-	public static void main(String[] args) {
-		DataBaseManager databasemansger = new DataBaseManager();
-		databasemansger.connect();
-//		databasemansger.select("1");
-		databasemansger.insert("3", "멍멍이", 10, "1313", "2022-02-24");
-		databasemansger.selectAll();
-	}
+//	public static void main(String[] args) {
+//		DataBaseManager databasemansger = new DataBaseManager();
+//		databasemansger.connect();
+////		databasemansger.select("1");
+//		databasemansger.insert("3", "멍멍이", 10, "1313", "2022-02-24");
+//		databasemansger.selectAll();
+//	}
 
 	public DataBaseManager() {
 		connect();
@@ -36,12 +36,10 @@ public class DataBaseManager {
 
 	public void select(String id) {
 		try {
-//			stmt = conn.createStatement();
 			String query = "select * from member where id =?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			ResultSet srs = pstmt.executeQuery();
-//			printData(srs);
 			if (srs.next()) {
 				System.out.println("id : " + srs.getString("id"));
 				System.out.println("name : " + srs.getString("name"));
@@ -92,5 +90,68 @@ public class DataBaseManager {
 			e.printStackTrace();
 		}
 	}
+
+	public void delete(String id) {
+		try {
+			String query = "delete from member where id=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public boolean isCheckID(String id) {
+		try {
+			String query = "select id from member where id =?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			ResultSet srs = pstmt.executeQuery();
+			if(srs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return false;
+	}
+	
+	public void updateName(String name, String id) {
+		try {
+			String query = "update member set name=? where id=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, name);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	public void updateAge(int age , String id) {
+		try {
+			String query = "update member set age=? where id=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, age);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	public void updatePhoneNumber(String phonNumber , String id) {
+		try {
+			String query = "update member set phon_Number=? where id=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, phonNumber);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+	}
+	
 
 }
